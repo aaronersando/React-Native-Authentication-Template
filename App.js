@@ -7,6 +7,9 @@ import SignupScreen from "./screens/SignupScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import { Colors } from "./constants/styles";
 
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+
 const Stack = createNativeStackNavigator();
 
 function AuthStack() {
@@ -40,9 +43,11 @@ function AuthenticatedStack() {
 
 function Navigation() {
   return (
-    <NavigationContainer>
-      <AuthStack />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
