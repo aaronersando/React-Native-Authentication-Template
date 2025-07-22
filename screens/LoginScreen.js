@@ -3,14 +3,18 @@ import { useState } from "react";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { login } from "../util/auth";
 import { Alert } from "react-native";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../store/authSlice";
 
 function LoginScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const dispatch = useDispatch();
 
   async function handleLogin({ email, password }) {
     setIsAuthenticating(true);
     try {
-      await login(email, password);
+      const token = await login(email, password);
+      dispatch(authenticate(token));
     } catch (err) {
       Alert.alert(
         "Authentication Failed!",

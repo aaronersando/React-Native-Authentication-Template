@@ -2,14 +2,19 @@ import { useState } from "react";
 import AuthContent from "../components/Auth/AuthContent";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { createUser } from "../util/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate, logout } from "../store/authSlice";
 
 function SignupScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  // const auth = useSelector((state) => state.authToken);
+  const dispatch = useDispatch();
 
   async function handleSignup({ email, password }) {
     setIsAuthenticating(true);
     try {
-      await createUser(email, password);
+      const token = await createUser(email, password);
+      dispatch(authenticate(token));
     } catch (err) {
       Alert.alert(
         "Authentication Failed!",
