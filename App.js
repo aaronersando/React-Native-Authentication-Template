@@ -10,7 +10,10 @@ import { Colors } from "./constants/styles";
 
 import { Provider, useSelector, useDispatch } from "react-redux";
 import { store } from "./store/store";
-import { logout } from "./store/authSlice";
+import { authenticate, logout } from "./store/authSlice";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppLoading from "expo-app-loading";
 
 const Stack = createNativeStackNavigator();
 
@@ -72,12 +75,38 @@ function Navigation() {
   );
 }
 
+function Root() {
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
+
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
+
+      if (storedToken) {
+        dispatch(authenticate(storedToken));
+      }
+
+      setIsTryingLogin(false);
+    }
+
+    fetchToken();
+  }, []);
+
+  if (isTryingLogin) {
+    return <AppLoading />;
+  }
+  return <Navigation />;
+}
+
 export default function App() {
   return (
     <>
       <StatusBar style="light" />
       <Provider store={store}>
-        <Navigation />
+        <Root />
       </Provider>
     </>
   );
