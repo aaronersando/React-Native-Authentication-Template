@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
+import { Colors } from "../constants/styles";
 
 function WelcomeScreen() {
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.title}>Welcome!</Text>
-      <Text>You authenticated successfully!</Text>
+      <Text style={styles.subtitle}>You authenticated successfully!</Text>
     </View>
   );
 }
@@ -17,10 +18,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 32,
+    backgroundColor: Colors.primary100,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 8,
+    color: Colors.text,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: Colors.textSecondary,
   },
 });

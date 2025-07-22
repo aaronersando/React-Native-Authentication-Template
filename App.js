@@ -5,10 +5,12 @@ import { StatusBar } from "expo-status-bar";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import IconButton from "./components/ui/IconButton";
 import { Colors } from "./constants/styles";
 
-import { Provider, useSelector } from "react-redux";
+import { Provider, useSelector, useDispatch } from "react-redux";
 import { store } from "./store/store";
+import { logout } from "./store/authSlice";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +30,11 @@ function AuthStack() {
 }
 
 function AuthenticatedStack() {
+  const dispatch = useDispatch();
+
+  function handleLogout() {
+    dispatch(logout());
+  }
   return (
     <Stack.Navigator
       screenOptions={{
@@ -36,7 +43,20 @@ function AuthenticatedStack() {
         contentStyle: { backgroundColor: Colors.primary100 },
       }}
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{
+          headerRight: ({ tintColor }) => (
+            <IconButton
+              icon="exit"
+              color={tintColor}
+              size={24}
+              onPress={handleLogout}
+            />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 }

@@ -1,12 +1,13 @@
 export const Colors = {
-  primary100: "#2a2d35", // Dark matte charcoal
-  primary500: "#1a1d23", // Deep dark slate
-  primary800: "#0f1114", // Almost black matte
-  error100: "#2d1b1b", // Dark muted red background
-  error500: "#c44569", // Muted coral red for errors
-  accent: "#64b5f6", // Cool blue accent
-  surface: "#1e2128", // Dark surface color
-  text: "#e8eaed", // Light text on dark
-  textSecondary: "#9aa0a6", // Muted secondary text
-  border: "#3c4043", // Subtle border color
+  primary50: "#5c5e63be", // Much lighter charcoal
+  primary100: "#4a4d55", // Much lighter charcoal
+  primary500: "#3a3d43", // Lighter slate
+  primary800: "#2f3234", // Lighter dark
+  error100: "#4d3b3b",
+  error500: "#c44569",
+  accent: "#64b5f6",
+  surface: "#3e4148", // Lighter surface
+  text: "#e8eaed",
+  textSecondary: "#9aa0a6",
+  border: "#5c6063", // Lighter border
 };
