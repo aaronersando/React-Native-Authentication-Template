@@ -4,6 +4,7 @@ import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { createUser } from "../util/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticate, logout } from "../store/authSlice";
+import { Alert } from "react-native";
 
 function SignupScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -20,8 +21,8 @@ function SignupScreen() {
         "Authentication Failed!",
         "Could not create user. Please check your credentials!"
       );
+      setIsAuthenticating(false);
     }
-    setIsAuthenticating(false);
   }
 
   if (isAuthenticating) {
